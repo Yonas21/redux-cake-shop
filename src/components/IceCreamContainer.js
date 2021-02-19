@@ -1,48 +1,48 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
-import { buyCake } from '../redux';
+import { buyIceCream } from '../redux/icecream/IceCreamAction';
 
 const Wrapper = styled.div`
   margin: 10px auto;
   text-align: center;
   width: 50%;
-  background: white;
+  background: lightgrey;
   padding: 10px;
   box-shadow: 0 2px 8px lightgrey;
 `;
 
 const Button = styled.button`
   font-family: cursive;
-  background: #008975;
+  background: chocolate;
   color: white;
   font-size: 1em;
   margin: 1em;
   padding: 0.25em 1em;
-  border: 2px solid #008975;
+  border: 2px solid chocolate;
   border-radius: 3px;
   padding: 7px 10px;
 `;
-
-function CakeContainer(props) {
+function IceCreamContainer(props) {
   return (
     <Wrapper>
-      <h2>Number of Cakes - {props.numberOfCakes}</h2>
-      <Button onClick={props.buyCake}>Buy Cake</Button>
+      <h2>Number of IceCreams - {props.numberOfIceCreams}</h2>
+      <Button onClick={props.buyIceCream}>Buy IceCream</Button>
     </Wrapper>
   );
 }
 
 const mapStateToProps = (state) => {
   return {
-    numberOfCakes: state.cake.numberOfCakes,
+    numberOfIceCreams: state.icecream.numberOfIceCreams,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    buyCake: () => dispatch(buyCake()),
+    buyIceCream: () => dispatch(buyIceCream()),
   };
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CakeContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(IceCreamContainer);

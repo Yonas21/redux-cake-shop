@@ -1,7 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { buyCake } from '../redux';
 
 const Wrapper = styled.div`
@@ -24,25 +23,15 @@ const Button = styled.button`
   border-radius: 3px;
   padding: 7px 10px;
 `;
-
-function CakeContainer(props) {
+function HooksCakeContainer() {
+  const numberofCakes = useSelector((state) => state.cake.numberOfCakes);
+  const dispatch = useDispatch();
   return (
     <Wrapper>
-      <h2>Number of Cakes - {props.numberOfCakes}</h2>
-      <Button onClick={props.buyCake}>Buy Cake</Button>
+      <h2>Number of Cakes - {numberofCakes} </h2>
+      <Button onClick={() => dispatch(buyCake())}>Buy Cake</Button>
     </Wrapper>
   );
 }
 
-const mapStateToProps = (state) => {
-  return {
-    numberOfCakes: state.cake.numberOfCakes,
-  };
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    buyCake: () => dispatch(buyCake()),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(CakeContainer);
+export default HooksCakeContainer;
